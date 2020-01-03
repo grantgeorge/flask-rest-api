@@ -9,9 +9,12 @@ from flask_login import UserMixin, AnonymousUserMixin
 from app.exceptions import ValidationError
 from .. import db, login_manager
 
-from . import goal
+from . import goal, habit
 
 Goal = goal.Goal
+Habit = habit.Habit
+Completion = habit.Completion
+
 
 class Permission:
     FOLLOW = 1
@@ -99,6 +102,7 @@ class User(UserMixin, db.Model):
     avatar_hash = db.Column(db.String(32))
     posts = db.relationship('Post', backref='author', lazy='dynamic')
     goals = db.relationship('Goal', backref='author', lazy='dynamic')
+    habits = db.relationship('Habit', backref='owner', lazy='dynamic')
     followed = db.relationship('Follow',
                                foreign_keys=[Follow.follower_id],
                                backref=db.backref('follower', lazy='joined'),

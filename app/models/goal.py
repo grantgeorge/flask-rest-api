@@ -19,7 +19,7 @@ class Goal(db.Model):
 
     def to_json(self):
         json_goal = {
-            'url': url_for('api.get_post', id=self.id),
+            'url': url_for('api.get_goal', id=self.id),
             'name': self.name,
             'description': self.description,
             'timestamp': self.timestamp,
