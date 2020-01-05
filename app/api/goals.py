@@ -1,4 +1,4 @@
-from flask import jsonify, abort, request, g, url_for, current_app
+from flask import jsonify, request, g, url_for, current_app
 from .. import db
 from ..models import Goal, Permission
 from . import api
@@ -10,7 +10,7 @@ from .errors import forbidden, not_found
 def get_goals():
     page = request.args.get('page', 1, type=int)
     pagination = Goal.query.paginate(
-        page, per_page=current_app.config['FLASKY_POSTS_PER_PAGE'],
+        page, per_page=current_app.config['API_POSTS_PER_PAGE'],
         error_out=False)
     goals = pagination.items
     prev = None

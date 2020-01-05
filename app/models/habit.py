@@ -41,14 +41,20 @@ class Habit(db.Model):
             'name': self.name,
             'description': self.description,
             'owner_url': url_for('api.get_user', id=self.owner_id),
-            'completions_url': url_for('api.get_habit_completions', id=self.id),
+            'frequency': HabitFrequency(self.frequency).value,
+            'duration_count': self.duration_count,
+            'duration_type': DurationType(self.duration_type).value,
+            'successful': self.successful,
+            'starts_at': self.starts_at,
+            'ends_at': self.ends_at,
+            #'completions_url': url_for('api.get_habit_completions', id=self.id),
             'completions_count': self.completions.count()
         }
         return json_habit
 
     @staticmethod
     def from_json(json_habit):
-        return Habit(json_habit)
+        return Habit(**json_habit)
 
 
 class Completion(db.Model):

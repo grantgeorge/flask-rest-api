@@ -1,5 +1,5 @@
 -r common.txt
-certifi==2019.11.28
+certifi==2017.7.27.1
 chardet==3.0.4
 coverage==5.0.1
 faker==3.0.0
