@@ -1,6 +1,6 @@
 from datetime import datetime, timedelta
 import enum
-from flask import url_for
+from flask_restful import url_for
 from .. import db
 from sqlalchemy.sql import func
 
@@ -37,7 +37,7 @@ class Habit(db.Model):
 
     def to_json(self):
         json_habit = {
-            'url': url_for('api.get_habit', id=self.id),
+            'url': url_for('api.habit', id=self.id),
             'name': self.name,
             'description': self.description,
             'owner_url': url_for('api.get_user', id=self.owner_id),
